@@ -1,0 +1,6 @@
+[Details]
+  Icon = "icon.png"
+  Name = "GDMon"
+  ID = "com.github/source-c/go-dummy-monitor"
+  Version = "1.0"
+  Build = 1

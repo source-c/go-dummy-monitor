@@ -115,12 +115,20 @@ func (b *GenericGraph) DrawSingleGraph(graphContainer *fyne.Container, data []fl
 	// Calculate points spacing based on container width
 	pointSpacing := (containerWidth - b.LabelHeight) / float32(len(data))
 
+	// Find the maximum value in the data
+	dataMax := maxValue
+	for _, v := range data {
+		if v > dataMax {
+			dataMax = v
+		}
+	}
+
 	// Draw graph lines with adaptive spacing
 	for i := 1; i < len(data); i++ {
 		x1 := b.ElementSpacing + pointSpacing*float32(i-1)
-		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(data[i-1])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
+		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(data[i-1])/float32(dataMax))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 		x2 := b.ElementSpacing + pointSpacing*float32(i)
-		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(data[i])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
+		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(data[i])/float32(dataMax))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 
 		b.DrawLine(graphContainer, x1, y1, x2, y2, color, b.StrokeWidth)
 	}
@@ -133,8 +141,28 @@ func (b *GenericGraph) DrawDualGraph(graphContainer *fyne.Container, primaryData
 	// Calculate points spacing based on container width
 	pointSpacing := (containerWidth - b.LabelHeight) / float32(len(primaryData))
 
+	// Find the maximum value across both datasets
+	dataMax := maxValue
+	for _, v := range primaryData {
+		if v > dataMax {
+			dataMax = v
+		}
+	}
+	for _, v := range secondaryData {
+		if v > dataMax {
+			dataMax = v
+		}
+	}
+
 	// Draw primary data
-	b.DrawSingleGraph(graphContainer, primaryData, maxValue, primaryColor, containerWidth)
+	for i := 1; i < len(primaryData); i++ {
+		x1 := b.ElementSpacing + pointSpacing*float32(i-1)
+		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(primaryData[i-1])/float32(dataMax))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
+		x2 := b.ElementSpacing + pointSpacing*float32(i)
+		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(primaryData[i])/float32(dataMax))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
+
+		b.DrawLine(graphContainer, x1, y1, x2, y2, primaryColor, b.StrokeWidth)
+	}
 
 	// Use slightly different color for secondary data
 	if rgba, ok := secondaryColor.(color.RGBA); ok {
@@ -145,9 +173,9 @@ func (b *GenericGraph) DrawDualGraph(graphContainer *fyne.Container, primaryData
 	// Draw secondary data
 	for i := 1; i < len(secondaryData); i++ {
 		x1 := b.ElementSpacing + pointSpacing*float32(i-1)
-		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(secondaryData[i-1])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
+		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(secondaryData[i-1])/float32(dataMax))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 		x2 := b.ElementSpacing + pointSpacing*float32(i)
-		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(secondaryData[i])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
+		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(secondaryData[i])/float32(dataMax))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 
 		b.DrawLine(graphContainer, x1, y1, x2, y2, secondaryColor, b.StrokeWidth)
 	}

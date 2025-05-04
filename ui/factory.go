@@ -84,8 +84,8 @@ func (f *WidgetFactory) CreateNetworkWidget() widgets.MonitorWidget {
 		*baseGraph,
 		provider,
 		infoRows,
-		"Download",
-		"Upload",
+		"",
+		"",
 		"D:%.1f U:%.1f MB/s",
 	)
 }

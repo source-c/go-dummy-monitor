@@ -11,6 +11,7 @@ import (
 
 	"go-dummy-monitor/constants"
 	"go-dummy-monitor/ui"
+	"go-dummy-monitor/utils"
 )
 
 // Application-specific constants
@@ -28,8 +29,8 @@ func main() {
 
 	// Initialize monitoring system
 	monitorSystem := ui.NewMonitorSystem(
-		125,   // Max network speed in MB/s (125 MB/s is the 1000Mbit/s or 1Gbps)
-		false, // Dark mode
+		utils.GetMaxNetworkSpeed(), // Max network speed in MB/s
+		false,                      // Dark mode
 		constants.LightColors,
 		constants.DarkColors,
 		constants.EmptyRectangle, // Empty rectangle color

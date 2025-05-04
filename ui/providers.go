@@ -234,6 +234,26 @@ func GetNetworkInfoProvider(system MonitoringSystem) []widgets.InfoRow {
 			},
 		},
 		{
+			Label: "Download",
+			GetValue: func() string {
+				data := system.GetNetworkReadData()
+				if len(data) > 0 {
+					return fmt.Sprintf("%.2f MB/s", data[len(data)-1])
+				}
+				return "0.00 MB/s"
+			},
+		},
+		{
+			Label: "Upload",
+			GetValue: func() string {
+				data := system.GetNetworkWriteData()
+				if len(data) > 0 {
+					return fmt.Sprintf("%.2f MB/s", data[len(data)-1])
+				}
+				return "0.00 MB/s"
+			},
+		},
+		{
 			Label: "Max Speed",
 			GetValue: func() string {
 				return fmt.Sprintf("%.1f MB/s", system.GetMaxNetworkSpeed())

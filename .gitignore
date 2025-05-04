@@ -18,3 +18,4 @@ monitor
 *.tmp
 .DS_STORE
 .history
+coverage.txt

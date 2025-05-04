@@ -16,20 +16,21 @@ const (
 	STATS_UPDATE_INTERVAL = 1000 // Milliseconds between stats updates
 
 	// Window sizing constants
-	MIN_WIDTH         = 350 // Minimum width before hiding right column
-	MIN_HEIGHT        = 400 // Minimum height before collapsing
-	MIN_GRAPH_HEIGHT  = 100 // Minimum height of graph component
-	GRAPH_WIDTH       = 300 // Width of graph component
-	GRAPH_HEIGHT      = 180 // Height of graph component
-	GRAPH_PADDING     = 40  // Padding around graph
-	LABEL_HEIGHT      = 20  // Standard height for labels
-	DEFAULT_PADDING   = 10  // Default padding between elements
-	TEXT_PADDING      = 5   // Padding for text elements
-	ELEMENT_SPACING   = 10  // Spacing between UI elements
-	HEADING_TEXT_SIZE = 16  // Size for heading text
-	NORMAL_TEXT_SIZE  = 14  // Size for normal text
-	SMALL_TEXT_SIZE   = 12  // Size for small text
-	STROKE_WIDTH      = 2   // Default stroke width
+	MIN_WIDTH               = 350 // Minimum width before hiding right column
+	MIN_HEIGHT              = 400 // Minimum height before collapsing
+	MIN_GRAPH_HEIGHT        = 100 // Minimum height of graph component
+	GRAPH_WIDTH             = 300 // Width of graph component
+	GRAPH_HEIGHT            = 180 // Height of graph component
+	GRAPH_PADDING           = 40  // Padding around graph
+	LABEL_HEIGHT            = 20  // Standard height for labels
+	DEFAULT_PADDING         = 10  // Default padding between elements
+	TEXT_PADDING            = 5   // Padding for text elements
+	ELEMENT_SPACING         = 10  // Spacing between UI elements
+	HEADING_TEXT_SIZE       = 16  // Size for heading text
+	NORMAL_TEXT_SIZE        = 14  // Size for normal text
+	SMALL_TEXT_SIZE         = 12  // Size for small text
+	STROKE_WIDTH            = 2   // Default stroke width
+	GRAPH_HEIGHT_MULTIPLIER = 2.5 // Multiplier for graph height calculation
 
 	// Window sizing factors
 	INITIAL_WIDTH_FACTOR  = 0.6 // Percentage of screen width for initial window

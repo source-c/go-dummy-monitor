@@ -3,7 +3,7 @@ package ui
 import (
 	"fmt"
 	"image/color"
-	
+
 	"go-dummy-monitor/ui/widgets"
 )
 
@@ -185,7 +185,7 @@ func GetRAMInfoProvider(system MonitoringSystem) []widgets.InfoRow {
 			Label: "Used",
 			GetValue: func() string {
 				v := system.GetVirtualMemory()
-				return fmt.Sprintf("%.1f GB (%.1f%%)", 
+				return fmt.Sprintf("%.1f GB (%.1f%%)",
 					float64(v.Used)/(1024*1024*1024), system.GetRAMUsage())
 			},
 		},
@@ -217,7 +217,7 @@ func GetCPUInfoProvider(system MonitoringSystem) []widgets.InfoRow {
 		{
 			Label: "Cores",
 			GetValue: func() string {
-				return fmt.Sprintf("%d physical / %d logical", 
+				return fmt.Sprintf("%d physical / %d logical",
 					system.GetPhysicalCPUCount(), system.GetLogicalCPUCount())
 			},
 		},

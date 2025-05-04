@@ -61,8 +61,8 @@ func (d *DualValueWidget) CreateCompactView() *fyne.Container {
 			containerWidth = d.GraphWidth
 		}
 
-		// Add header with title
-		d.AddTitle(graphContainer, fmt.Sprintf("%s", d.Provider.GetTitle()), d.TextColor)
+		// Add title and subtitle
+		d.AddTitle(graphContainer, d.Provider.GetTitle(), d.TextColor)
 
 		// Add IO info as subtitle
 		d.AddSubtitle(

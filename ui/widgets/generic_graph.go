@@ -3,6 +3,8 @@ package widgets
 import (
 	"image/color"
 
+	"go-dummy-monitor/constants"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
@@ -49,6 +51,7 @@ func (b *GenericGraph) CreateGraphContainer() (*fyne.Container, *canvas.Rectangl
 	// Create responsive background for graph area
 	graphBg := canvas.NewRectangle(b.BackgroundColor)
 	graphBg.SetMinSize(fyne.NewSize(b.GraphWidth, b.GraphHeight))
+	graphBg.Resize(fyne.NewSize(b.GraphWidth, b.GraphHeight))
 	graphContainer.Add(graphBg)
 
 	return graphContainer, graphBg
@@ -115,9 +118,9 @@ func (b *GenericGraph) DrawSingleGraph(graphContainer *fyne.Container, data []fl
 	// Draw graph lines with adaptive spacing
 	for i := 1; i < len(data); i++ {
 		x1 := b.ElementSpacing + pointSpacing*float32(i-1)
-		y1 := float32(b.GraphPadding*2.5-(float32(data[i-1])*b.GraphPadding*2.5/float32(maxValue))) + b.GraphPadding
+		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(data[i-1])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 		x2 := b.ElementSpacing + pointSpacing*float32(i)
-		y2 := float32(b.GraphPadding*2.5-(float32(data[i])*b.GraphPadding*2.5/float32(maxValue))) + b.GraphPadding
+		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(data[i])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 
 		b.DrawLine(graphContainer, x1, y1, x2, y2, color, b.StrokeWidth)
 	}
@@ -142,9 +145,9 @@ func (b *GenericGraph) DrawDualGraph(graphContainer *fyne.Container, primaryData
 	// Draw secondary data
 	for i := 1; i < len(secondaryData); i++ {
 		x1 := b.ElementSpacing + pointSpacing*float32(i-1)
-		y1 := float32(b.GraphPadding*2.5-(float32(secondaryData[i-1])*b.GraphPadding*2.5/float32(maxValue))) + b.GraphPadding
+		y1 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(secondaryData[i-1])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 		x2 := b.ElementSpacing + pointSpacing*float32(i)
-		y2 := float32(b.GraphPadding*2.5-(float32(secondaryData[i])*b.GraphPadding*2.5/float32(maxValue))) + b.GraphPadding
+		y2 := b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER - (float32(secondaryData[i])/float32(maxValue))*b.GraphPadding*constants.GRAPH_HEIGHT_MULTIPLIER + b.GraphPadding
 
 		b.DrawLine(graphContainer, x1, y1, x2, y2, secondaryColor, b.StrokeWidth)
 	}

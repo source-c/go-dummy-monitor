@@ -7,7 +7,6 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
-	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
 	"go-dummy-monitor/constants"
@@ -25,7 +24,7 @@ func main() {
 	darkMode := false
 
 	// Set initial theme and colors
-	a.Settings().SetTheme(theme.LightTheme())
+	a.Settings().SetTheme(ui.NewCustomTheme(darkMode))
 
 	// Initialize monitoring system
 	monitorSystem := ui.NewMonitorSystem(
@@ -48,10 +47,10 @@ func main() {
 	themeButton := widget.NewButton("Toggle Theme", func() {
 		darkMode = !darkMode
 		if darkMode {
-			a.Settings().SetTheme(theme.DarkTheme())
+			a.Settings().SetTheme(ui.NewCustomTheme(darkMode))
 			monitorSystem.UpdateTheme(true, constants.LightColors, constants.DarkColors)
 		} else {
-			a.Settings().SetTheme(theme.LightTheme())
+			a.Settings().SetTheme(ui.NewCustomTheme(darkMode))
 			monitorSystem.UpdateTheme(false, constants.LightColors, constants.DarkColors)
 		}
 
@@ -90,10 +89,10 @@ func main() {
 	themeButton.OnTapped = func() {
 		darkMode = !darkMode
 		if darkMode {
-			a.Settings().SetTheme(theme.DarkTheme())
+			a.Settings().SetTheme(ui.NewCustomTheme(darkMode))
 			monitorSystem.UpdateTheme(true, constants.LightColors, constants.DarkColors)
 		} else {
-			a.Settings().SetTheme(theme.LightTheme())
+			a.Settings().SetTheme(ui.NewCustomTheme(darkMode))
 			monitorSystem.UpdateTheme(false, constants.LightColors, constants.DarkColors)
 		}
 
